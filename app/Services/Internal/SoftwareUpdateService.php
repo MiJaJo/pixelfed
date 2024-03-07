@@ -13,7 +13,7 @@ class SoftwareUpdateService
 
     public static function get()
     {
-        $curVersion = preg_replace("/\+.+/i","",config('pixelfed.version'));
+        $curVersion = config('pixelfed.version');
 
         $versions = Cache::remember(self::CACHE_KEY . 'latest:v1.0.0', 1800, function() {
             return self::fetchLatest();

@@ -1,2 +1,2 @@
-<h2><span>Processing your membership request</span></h2>
-<p class="lead">We will send you an email once your account is ready!</p>
+<h2><span>ユーザー登録申請が進行中です。</span></h2>
+<p class="lead">アカウントの利用準備ができたら、あなたにメールが届きます。それまで、しばらくお待ちください。最大で数日かかることがありますので、なかなか承認されないなという場合は、見逃している可能性もありますので、マスコどん！のこじょんまでご連絡ください。</p>

@@ -1,22 +1,21 @@
 @component('mail::message')
-# Action Needed: Additional information requested
+# 操作が必要です: 追加情報が必要です
 
-Hello **{{'@'.$verify->username}}**
+**{{'@'.$verify->username}}** さん、こんにちは！
 
-To help us process your registration application, we require more information.
+あなたの登録を続けるためには、追加の情報が必要です。
 
-Our onboarding team have requested the following details:
+管理者ならびにモデレーターが、以下の情報を必要としています。
 
 @component('mail::panel')
 <p style="white-space: pre-wrap;">{!! $activity->message !!}</p>
 @endcomponent
 <x-mail::button :url="$activity->emailReplyUrl()" color="success">
-<strong>Reply with your response</strong>
+<strong>返信する</strong>
 </x-mail::button>
 
-<p style="font-size:10pt;">Please respond promptly, your application will be automatically removed 7 days after your last interaction.</p>
+<p style="font-size:10pt;">最後にアクションがあってから7日経つと、あなたの申請は自動的に却下されてしまいますので、お早めにご返事ください。</p>
 <br>
 
-Thanks,<br>
-<a href="{{ config('app.url') }}">{{ config('pixelfed.domain.app') }}</a>
+<a href="{{ config('app.url') }}">{{ config('pixelfed.domain.app') }}</a> より
 @endcomponent

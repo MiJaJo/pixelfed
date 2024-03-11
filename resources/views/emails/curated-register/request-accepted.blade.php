@@ -1,37 +1,37 @@
 @component('mail::message')
-Hello **{{'@'.$verify->username}}**,
+**{{'@'.$verify->username}}** さん、こんにちは！
 
 
-We are excited to inform you that your account has been successfully activated!
+あなたのアカウント申請は承認されました。このお知らせができることを嬉しく思います。
 
-Your journey into the world of visual storytelling begins now, and we can’t wait to see the incredible content you’ll create and share.
+旅はまだはじまったばかりです！あなたからのすばらしい投稿や共有が待ちきれません！
 
 <x-mail::button :url="url('/login?email=' . $verify->email)" color="success">
-<strong>Sign-in to your account</strong>
+<strong>さっそくサインインしましょう</strong>
 </x-mail::button>
 
-Here’s what you can do next:
+あなたが次にやるべきことを、ここに記しておきますね。
 
 <x-mail::panel>
-**Personalize Your Profile**: Customize your profile to reflect your personality or brand.
+**プロフィールを完璧にしましょう**: 自分のプロフィールをカスタマイズして、"あなたらしさ"やブランドを主張しましょう。
 
-**Start Sharing**: Post your first photo or album and share your unique perspective with the world.
+**投稿を始めましょう**: はじめての写真、アルバム、イラスト、アイデアを投稿し、あなた独自の視点を世界へ発信しましょう。
 
-**Engage with the Community**: Follow other users, like and comment on posts, and become an active member of our vibrant community.
+**コミュニティと出会いましょう**: 他のユーザーをフォローしたり、"お気に入り"やコメントをしたりして、活気に満ちたコミュニティを作り上げましょう。
 
-**Explore**: Discover amazing content from a diverse range of users and hashtags.
+**探索しましょう**: 世界中のユーザーやハッシュタグを使用して、素晴らしいコンテンツを探しに行きましょう。
 </x-mail::panel>
 
-Need help getting started? Visit our [Help Center]({{url('site/help')}}) for tips, tutorials, and FAQs. Remember, our community thrives on respect and creativity, so please familiarize yourself with our [Community Guidelines]({{url('site/kb/community-guidelines')}}).
+始めるのに助けが必要ですか？ [ヘルプセンター (英語)]({{url('site/help')}}) に行き、ヒントやチュートリアル、よくある質問を探してみましょう。
 
-If you have any questions or need assistance, feel free to reach out to [our support team]({{url('/site/contact')}}).
+もし何か質問や補助が必要な場合、お気軽に [こじょん](https://mascodon.jp/@cojohne) へご連絡ください。
 
-Happy posting, and once again, welcome to Pixelfed!
+楽しい投稿を、さらにもうひとつ。マスコどん！ぴくちゃ へ ようこそ！
 
-Warm regards,<br>
-<strong>{{ config('pixelfed.domain.app') }}</strong>
+よろしくね。<br>
+<strong>{{ config('pixelfed.domain.app') }}</strong> より
 
 <br>
 <hr>
-<p style="font-size:10pt;">This is an automated message, please be aware that replies to this email cannot be monitored or responded to.</p>
+<p style="font-size:10pt;">このメールは送信専用アドレスより自動送信されています。このメールに返信してもお返事できかねますのでご了承ください。</p>
 @endcomponent

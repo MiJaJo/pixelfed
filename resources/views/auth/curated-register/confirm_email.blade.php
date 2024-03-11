@@ -20,8 +20,8 @@
                 <div class="mb-5"></div>
             @endif
 
-            <h1 class="text-center">Confirm Email</h1>
-            <p class="lead text-center">Please confirm your email address so we can continue processing your registration application.</p>
+            <h1 class="text-center">メールの確認</h1>
+            <p class="lead text-center">メールの確認を実施して、登録を続けましょう。</p>
 
             <form method="post">
                 @csrf
@@ -33,7 +33,7 @@
                 </div>
                 @endif
                 <div class="mt-3 pt-4">
-                    <button class="btn btn-primary rounded-pill font-weight-bold btn-block">Confirm Email Address</button>
+                    <button class="btn btn-primary rounded-pill font-weight-bold btn-block">メールアドレスを確認する</button>
                 </div>
             </form>
         </div>

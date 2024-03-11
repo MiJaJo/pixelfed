@@ -1,4 +1,4 @@
-<p class="mt-5 lead text-center font-weight-bold">Please verify your email address</p>
+<p class="mt-5 lead text-center font-weight-bold">あなたのメールアドレスを確認してください</p>
 <form method="post">
     @csrf
     <input type="hidden" name="action" value="email">
@@ -7,7 +7,7 @@
             type="email"
             class="form-control form-control-lg bg-dark border-dark text-white"
             name="email"
-            placeholder="Your email address"
+            placeholder="あなたのメールアドレス"
             required />
     </div>
     @if(config('instance.curated_registration.captcha_enabled'))

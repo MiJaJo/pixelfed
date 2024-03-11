@@ -21,8 +21,8 @@
             @endif
 
             @if($emailConfirmed)
-            <h1 class="text-center font-weight-bold mt-4">Information Requested</h1>
-            <p class="lead text-center"><span class="font-weight-light">Our admin team requests the following information from you:</span></p>
+            <h1 class="text-center font-weight-bold mt-4">追加情報リクエスト</h1>
+            <p class="lead text-center"><span class="font-weight-light">管理チームは、以下の情報を要求しています。</span></p>
             <div class="border border-primary p-4 rounded my-3" style="border-style: dashed !important;">
                 <p class="mb-0 lead">testing</p>
             </div>
@@ -33,20 +33,20 @@
                 <input type="hidden" name="action" value="message">
 
                 <div class="form-group">
-                    <label for="message">Your Response</label>
+                    <label for="message">あなたの返答</label>
                     <textarea
                         class="form-control bg-dark border-dark text-white"
                         rows="4"
                         id="reason"
                         name="response"
-                        placeholder="Enter your response here, up to 1000 chars..."
+                        placeholder="1,000文字以内で返答を入力してください"
                         maxlength="1000"></textarea>
                     <div class="help-text small text-muted d-flex justify-content-end mt-1 font-weight-bold">
                         <span id="charCount" class="text-white">0</span>/<span>1000</span>
                     </div>
                 </div>
 
-                <button class="btn btn-primary font-weight-bold rounded-pill px-5">Submit</button>
+                <button class="btn btn-primary font-weight-bold rounded-pill px-5">送信</button>
             </form>
             <hr class="border-dark">
             <p class="text-muted small text-center">For additional information, please see our <a href="{{ route('help.curated-onboarding') }}" style="font-weight: 600;">Curated Onboarding</a> Help Center page.</p>

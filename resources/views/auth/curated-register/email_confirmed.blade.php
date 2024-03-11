@@ -12,11 +12,11 @@
             @include('auth.curated-register.partials.progress-bar', ['step' => 4])
 
             <p class="text-center"><i class="fal fa-check-circle text-success fa-8x"></i></p>
-            <h1 class="text-center font-weight-bold my-4">Email Confirmed!</h1>
-            <p class="h4 text-center"><span class="font-weight-bold">Our admin team will review your application.</span></p>
+            <h1 class="text-center font-weight-bold my-4">メールが確認されました！</h1>
+            <p class="h4 text-center"><span class="font-weight-bold">これより、管理者やモデレーターによって、あなたの登録が審査されます。</span></p>
             <hr class="border-dark">
-            <p class="lead text-center">Most applications are processed within 24-48 hours. We will send you an email once your account is ready!</p>
-            <p class="text-muted text-center">If we need any additional information, we will send you an automated request with a link that you can visit and provide further details to help process your application.</p>
+            <p class="lead text-center">審査は、おおむね24時間～48時間以内に行われます。アカウントの準備ができた場合は、メールにてお知らせします。</p>
+            <p class="text-muted text-center">審査において情報が不足していると判断された場合、追加の情報を入力するためのメールが送信されることがあります。</p>
             <hr class="border-dark">
             <p class="text-muted small text-center">For additional information, please see our <a href="{{ route('help.curated-onboarding') }}" style="font-weight: 600;">Curated Onboarding</a> Help Center page.</p>
         </div>

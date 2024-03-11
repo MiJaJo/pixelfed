@@ -1,19 +1,19 @@
 @component('mail::message')
-Hello **{{'@'.$verify->username}}**,
+**{{'@'.$verify->username}}** さん、こんにちは。
 
-We appreciate the time you took to apply for an account on {{ config('pixelfed.domain.app') }}.
 
-Unfortunately, after reviewing your [application]({{route('help.curated-onboarding')}}), we have decided not to proceed with the activation of your account.
+私達は、あなたが {{ config('pixelfed.domain.app') }} に登録できるかを審査しました。
 
-This decision is made to ensure the best experience for all members of our community. We encourage you to review our [guidelines]({{route('help.community-guidelines')}}) and consider applying again in the future.
+審査の結果、残念ながらあなたのアカウントは承認されませんでした。
 
-We appreciate your understanding. If you believe this decision was made in error, or if you have any questions, please don’t hesitate to [contact us]({{route('site.contact')}}).
+この決定はコミュニティ全体をベストに保つために行われました。ガイドラインを見て、何が問題だったかを確認し、将来的にあなたとお会いできる日をお待ちしています。
+
+この決定をご理解ください。もしなにかの間違いだと思う場合や、質問がある場合は、お気軽に [こじょん](https://mascodon.jp/@cojohne) までご連絡ください。
 
 <br>
 
-Thanks,<br>
-<a href="{{ config('app.url') }}">{{ config('pixelfed.domain.app') }}</a>
+<a href="{{ config('app.url') }}">{{ config('pixelfed.domain.app') }}</a> より
 <br>
 <hr>
-<p style="font-size:10pt;">This is an automated message, please be aware that replies to this email cannot be monitored or responded to.</p>
+<p style="font-size:10pt;">このメールは送信専用アドレスより自動送信されています。このメールに返信してもお返事できかねますのでご了承ください。</p>
 @endcomponent

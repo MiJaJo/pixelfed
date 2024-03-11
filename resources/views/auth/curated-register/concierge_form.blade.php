@@ -20,14 +20,14 @@
                 <div class="mb-5"></div>
             @endif
 
-            <h1 class="text-center font-weight-bold mt-4 mb-3"><i class="far fa-info-circle mr-2"></i> Information Requested</h1>
-            <p class="h5" style="line-height: 1.5;">Before we can process your application to join, our admin team have requested additional information from you. Please respond at your earliest convenience!</p>
+            <h1 class="text-center font-weight-bold mt-4 mb-3"><i class="far fa-info-circle mr-2"></i> 追加情報リクエスト</h1>
+            <p class="h5" style="line-height: 1.5;">あなたの登録を継続するためには、追加の情報が必要です。素早い承認をするために、お早めにご返事ください。</p>
             <hr class="border-dark">
-            <p>From our Admins:</p>
+            <p>管理者コメント:</p>
             <div class="card card-body mb-1 bg-dark border border-secondary" style="border-style: dashed !important;">
-                <p class="lead mb-0" style="white-space: pre; opacity: 0.8">{{ $activity->message }}</p>
+                <p class="lead mb-0" style="opacity: 0.8">{{ $activity->message }}</p>
             </div>
-            <p class="mb-3 small text-muted">If you don't understand this request, or need additional context you should request clarification from the admin team.</p>
+            <p class="mb-3 small text-muted">このコメントに書かれていることがわからない場合や、追加の説明を要求したい場合は、その旨を返信してください。</p>
             {{-- <hr class="border-dark"> --}}
 
             <form method="post">
@@ -35,13 +35,13 @@
                 <input type="hidden" name="crid" value="{{ $activity->register_id }}">
                 <input type="hidden" name="acid" value="{{ $activity->id }}">
                 <div class="form-group">
-                    <label for="message">Your Response</label>
+                    <label for="message">あなたの返答</label>
                     <textarea
                         class="form-control bg-dark border-dark text-white"
                         rows="4"
                         id="reason"
                         name="response"
-                        placeholder="Enter your response here, up to 1000 chars..."
+                        placeholder="1,000文字以内で返答を入力してください。"
                         maxlength="1000">{{ old('response') }}</textarea>
                     <div class="help-text small text-muted d-flex justify-content-end mt-1 font-weight-bold">
                         <span id="charCount" class="text-white">0</span>/<span>1000</span>
@@ -53,7 +53,7 @@
                 </div>
                 @endif
                 <div class="text-center">
-                    <button class="btn btn-primary font-weight-bold rounded-pill px-5">Submit my response</button>
+                    <button class="btn btn-primary font-weight-bold rounded-pill px-5">返答を送信する</button>
                 </div>
             </form>
             <hr class="border-dark">

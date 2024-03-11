@@ -1,14 +1,14 @@
 @component('mail::message')
-# [#{{$verify->id}}] New Curated Onboarding Application
+# [#{{$verify->id}}] 新しいアカウント承認が届きました
 
-Hello admin,
+管理者さんこんばんは。
 
-**Please review this new onboarding application.**
+**新しいアカウント承認をレビューしてください**
 
 <x-mail::panel>
 <p>
 <small>
-Username: <strong>{{ $verify->username }}</strong>
+ユーザー名: <strong>{{ $verify->username }}</strong>
 </small>
 <br>
 <small>
@@ -18,17 +18,16 @@ Email: <strong>{{ $verify->email }}</strong>
 
 <hr>
 
-<small><strong>*The user provided the following reason to join:*</strong></small>
+<small><strong>*このユーザーは以下の理由で登録を希望しています:*</strong></small>
 <p style="font-size:9pt;">{!!str_limit(nl2br($verify->reason_to_join), 300)!!}</p>
 </x-mail::panel>
 
 <x-mail::button :url="$verify->adminReviewUrl()" color="success">
-<strong>Review Onboarding Application</strong>
+<strong>アカウント承認をレビューする</strong>
 </x-mail::button>
 
-Thanks,<br>
-<a href="{{ config('app.url') }}">{{ config('pixelfed.domain.app') }}</a>
+<a href="{{ config('app.url') }}">{{ config('pixelfed.domain.app') }}</a> より
 <br>
 <hr>
-<p style="font-size:10pt;">This is an automated message, please be aware that replies to this email cannot be monitored or responded to.</p>
+<p style="font-size:10pt;">このメールは送信専用アドレスより自動送信されています。このメールに返信してもお返事できかねますのでご了承ください。</p>
 @endcomponent

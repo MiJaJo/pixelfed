@@ -1,21 +1,20 @@
 @component('mail::message')
-# New Message from {{config('pixelfed.domain.app')}}
+# {{config('pixelfed.domain.app')}} より新しいメッセージが届いています
 
-Hello,
+こんにちは。
 
-You recently applied to join our Pixelfed community using the &commat;**{{ $verify->username }}** username.
+最近、マスコどん！ぴくちゃに **{{ $verify->username }}** のユーザー名で申請した方へ。
 
-The admins have a message for you:
+管理者からあなた宛にメッセージがあります。:
 
 <x-mail::panel>
 <p style="white-space: pre-wrap;">{{ $verify->message }}</p>
 </x-mail::panel>
 
-Please do not respond to this email, any replies will not be seen by our admin team.
+このメールへは返信しないでください。返信しても、メッセージは届きません。
 
-Thanks,<br>
-<a href="{{ config('app.url') }}">{{ config('pixelfed.domain.app') }}</a>
+<a href="{{ config('app.url') }}">{{ config('pixelfed.domain.app') }}</a> より
 <br>
 <hr>
-<p style="font-size:10pt;">This is an automated message on behalf of our admin team, please be aware that replies to this email cannot be monitored or responded to.</p>
+<p style="font-size:10pt;">このメールは送信専用アドレスより自動送信されています。このメールに返信してもお返事できかねますのでご了承ください。</p>
 @endcomponent

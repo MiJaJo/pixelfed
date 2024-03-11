@@ -1,21 +1,21 @@
 @component('mail::message')
-# Action Needed: Confirm Your Email to Activate Your Pixelfed Account
+# 操作が必要です: マスコどん！ぴくちゃのアカウントを作成するには、メールの有効性を確認する必要があります。
 
-Hello **{{'@'.$verify->username}}**,
+**{{'@'.$verify->username}}** さん、こんにちは！
 
-Please confirm your email address so we can process your new registration application.
+マスコどん！ぴくちゃのアカウント登録を継続するには、メールアドレスの有効性を確認する必要があります。
+以下のボタンをクリックして、メールアドレスが有効であることを確認してください。
 
 <x-mail::button :url="$verify->emailConfirmUrl()" color="success">
-<strong>Confirm Email Address</strong>
+<strong>メールアドレスの有効性を確認する</strong>
 </x-mail::button>
 
 
-<p style="font-size:10pt;">If you did not create this account, please disregard this email. This link expires after 24 hours.</p>
+<p style="font-size:10pt;">もしあなたがアカウントの作成を望まない場合、このメールは無視してください。上記のボタンは24時間経つと無効になります。</p>
 <br>
 
-Thanks,<br>
-<a href="{{ config('app.url') }}">{{ config('pixelfed.domain.app') }}</a>
+<a href="{{ config('app.url') }}">{{ config('pixelfed.domain.app') }}</a> より
 <br>
 <hr>
-<p style="font-size:10pt;">This is an automated message, please be aware that replies to this email cannot be monitored or responded to.</p>
+<p style="font-size:10pt;">このメールは送信専用アドレスより自動送信されています。このメールに返信してもお返事できかねますのでご了承ください。</p>
 @endcomponent

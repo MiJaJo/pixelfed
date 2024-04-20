@@ -21,7 +21,7 @@
 						<img
 							:src="config.about.banner_image"
 							class="img-fluid rounded"
-							style="width: 100%;max-height: 200px;object-fit: cover;"
+							style="width: 100%;object-fit: cover;"
 							alt="Server banner image"
 							height="200"
 							onerror="this.src='/storage/headers/default.jpg';this.onerror=null;">

@@ -25,7 +25,7 @@
             <hr class="border-dark">
             <p>管理者コメント:</p>
             <div class="card card-body mb-1 bg-dark border border-secondary" style="border-style: dashed !important;">
-                <p class="lead mb-0" style="opacity: 0.8">{{ $activity->message }}</p>
+                <p class="lead mb-0" style="white-space: pre-wrap; opacity: 0.8;">{{ $activity->message }}</p>
             </div>
             <p class="mb-3 small text-muted">このコメントに書かれていることがわからない場合や、追加の説明を要求したい場合は、その旨を返信してください。</p>
             {{-- <hr class="border-dark"> --}}

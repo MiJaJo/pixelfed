@@ -29,10 +29,10 @@
             </div>
 
             <template v-else>
-                <video v-if="hasHls" ref="video" :class="{ fixedHeight: fixedHeight }" style="margin:0" playsinline controls autoplay="false" :poster="getPoster(status)">
+                <video v-if="hasHls" ref="video" :class="{ fixedHeight: fixedHeight }" style="margin:0" playsinline webkit-playsinline controls autoplay="false" :poster="getPoster(status)">
                 </video>
 
-                <video v-else class="card-img-top shadow" :class="{ fixedHeight: fixedHeight }" style="border-radius:15px;object-fit: contain;background-color: #000;" autoplay="false" controls :poster="getPoster(status)">
+                <video v-else class="card-img-top shadow" :class="{ fixedHeight: fixedHeight }" style="border-radius:15px;object-fit: contain;background-color: #000;" autoplay="false" playsinline webkit-playsinline controls :poster="getPoster(status)">
                     <source :src="status.media_attachments[0].url" :type="status.media_attachments[0].mime">
                 </video>
             </template>
@@ -45,8 +45,6 @@
     import Hls from 'hls.js';
     import "plyr/dist/plyr.css";
     import Plyr from 'plyr';
-    import { p2pml } from '@peertube/p2p-media-loader-core'
-    import { Engine, initHlsJsPlayer } from '@peertube/p2p-media-loader-hlsjs'
 
     export default {
         props: ['status', 'fixedHeight'],
@@ -72,8 +70,8 @@
         methods: {
             handleShouldPlay(){
                 this.shouldPlay = true;
-                this.isHlsSupported = this.hlsConfig.enabled && Hls.isSupported();
-                this.isP2PSupported = this.hlsConfig.enabled && this.hlsConfig.p2p && Engine.isSupported();
+                this.isHlsSupported = false;
+                this.isP2PSupported = false;
                 this.$nextTick(() => {
                     this.init();
                 })

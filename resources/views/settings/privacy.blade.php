@@ -8,8 +8,9 @@
   <hr>
   <div class="form-group pb-1">
     <p>
-      <a class="btn btn-outline-secondary py-0 font-weight-bold" href="{{route('settings.privacy.muted-users')}}">Muted Users</a>
-      <a class="btn btn-outline-secondary py-0 font-weight-bold" href="{{route('settings.privacy.blocked-users')}}">Blocked Users</a>
+      <a class="btn btn-link py-0 font-weight-bold" href="{{route('settings.privacy.muted-users')}}">{{ __('profile.mutedAccounts') }}</a>
+      <a class="btn btn-link py-0 font-weight-bold" href="{{route('settings.privacy.blocked-users')}}">{{ __('profile.blockedAccounts') }}</a>
+      <a class="btn btn-link py-0 font-weight-bold" href="{{route('settings.privacy.domain-blocks')}}">{{ __('profile.blockedDomains') }}</a>
     </p>
   </div>
   <form method="post">
@@ -94,6 +95,14 @@
         {{__('Show Following Count')}}
       </label>
       <p class="text-muted small help-text">Display following count on profile</p>
+    </div>
+
+    <div class="form-check pb-3">
+      <input class="form-check-input" type="checkbox" name="disable_embeds" id="disable_embeds" {{$settings->disable_embeds ? 'checked=""':''}}>
+      <label class="form-check-label font-weight-bold" for="disable_embeds">
+        {{__('Disable Embeds')}}
+      </label>
+      <p class="text-muted small help-text">Disable post and profile embeds</p>
     </div>
 
     @if(!$settings->is_private)

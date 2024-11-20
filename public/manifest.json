@@ -1,36 +1,36 @@
 {
-  "name": "Pixelfed",
-  "short_name": "Pixelfed",
+  "name": "マスコどん！ぴくちゃ",
+  "short_name": "マスコどん！ぴくちゃ",
   "start_url": "/?source=pwa",
   "display": "standalone",
   "background_color": "#f5f8fa",
-  "description": "Federated Image Sharing",
+  "description": "画像専用マスコどん！",
   "categories": ["social", "photo"],
   "shortcuts": [
     {
-      "name": "Notifications",
+      "name": "通知",
       "url": "/account/activity",
-      "description": "Keep up with your interactions"
+      "description": "やりとりしよう"
     },
     {
-      "name": "Direct Messages",
+      "name": "ダイレクトメッセージ",
       "url": "/account/direct",
-      "description": "Communicate directly with people"
+      "description": "だれかと直接つながろう"
     },
     {
-      "name": "Discover",
+      "name": "発見",
       "url": "/discover",
-      "description": "Find new posts and profiles"
+      "description": "まだ見ぬ投稿とプロフィールをさがそう"
     },
     {
-      "name": "Profile",
+      "name": "プロフィール",
       "url": "/i/me",
-      "description": "View your own profile page"
+      "description": "自分のプロフィールをひらくよ"
     },
     {
-      "name": "Settings",
+      "name": "設定",
       "url": "/settings",
-      "description": "Go to your account settings"
+      "description": "設定画面をひらくよ"
     }
   ],
   "icons": [

@@ -1094,6 +1094,17 @@ export default {
 			return `${parseFloat((bytes / Math.pow(1024, quotient)).toFixed(dec))} ${units[quotient]}`
 		},
 
+		defineErrorMessage(errObject) {
+			let msg;
+			if (errObject.response) {
+				msg = errObject.response.data.message ? errObject.response.data.message : 'An unexpected error occured.';
+			}
+			else {
+				msg = errObject.message;
+			}
+			return swal('Oops, something went wrong!', msg, 'error');
+		},
+
 		fetchProfile() {
 			let tags = {
 				public: 'Public',
@@ -1204,12 +1215,19 @@ export default {
 					}, 300);
 				}).catch(function(e) {
 					switch(e.response.status) {
+						case 403:
+							self.uploading = false;
+							io.value = null;
+							swal('Account size limit reached', 'Contact your admin for assistance.', 'error');
+							self.page = 2;
+						break;
+
 						case 413:
 							self.uploading = false;
 							io.value = null;
 							swal('File is too large', 'The file you uploaded has the size of ' + self.formatBytes(io.size) + '. Unfortunately, only images up to ' + self.formatBytes(self.config.uploader.max_photo_size  * 1024) + ' are supported.\nPlease resize the file and try again.', 'error');
 							self.page = 2;
-							break;
+						break;
 
 						case 451:
 							self.uploading = false;
@@ -1388,15 +1406,23 @@ export default {
 							location.href = res.data;
 						}
 					}).catch(err => {
-						if(err.response) {
-							let msg = err.response.data.message ? err.response.data.message : 'An unexpected error occured.'
-							swal('Oops, something went wrong!', msg, 'error');
-						} else {
-							swal('Oops, something went wrong!', err.message, 'error');
-						}
-					});
-					return;
-				break;
+                        switch(err.response.status) {
+                            case 400:
+                                if (err.response.data.error == "Must contain a single photo or video or multiple photos.") {
+                                    swal("Wrong types of mixed media", "The album must contain a single photo or video or multiple photos.", 'error');
+                                }
+								else {
+									this.defineErrorMessage(err);
+								}
+                            break;
+
+                            default:
+								this.defineErrorMessage(err);
+                            break;
+                        }
+                    });
+                    return;
+                break;
 
 				case 'delete' :
 					this.ids = [];
@@ -1740,57 +1766,91 @@ export default {
 
 		applyFilterToMedia() {
 			// this is where the magic happens
-			var ua = navigator.userAgent.toLowerCase();
-			if(ua.indexOf('firefox') == -1 && ua.indexOf('chrome') == -1) {
-                this.isPosting = false;
-			 	swal('Oops!', 'Your browser does not support the filter feature.', 'error');
-                this.page = 3;
-			 	return;
-			}
-
             let count = this.media.filter(m => m.filter_class).length;
             if(count) {
                 this.page = 'filteringMedia';
                 this.filteringRemainingCount = count;
                 this.$nextTick(() => {
                     this.isFilteringMedia = true;
-                    this.media.forEach((media, idx) => this.applyFilterToMediaSave(media, idx));
+                    Promise.all(this.media.map(media => {
+                        return this.applyFilterToMediaSave(media);
+                    })).catch(err => {
+                        console.error(err);
+                        swal('Oops!', 'An error occurred while applying filters to your media. Please refresh the page and try again. If the problem persist, please try a different web browser.', 'error');
+                    });
                 })
             } else {
                 this.page = 3;
             }
 		},
 
-        applyFilterToMediaSave(media, idx) {
+        async applyFilterToMediaSave(media) {
             if(!media.filter_class) {
                 return;
             }
 
-            let self = this;
-            let data = null;
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            let image = document.createElement('img');
+            // Load image
+            const image = document.createElement('img');
             image.src = media.url;
-            image.addEventListener('load', e => {
+            await new Promise((resolve, reject) => {
+                image.addEventListener('load', () => resolve());
+                image.addEventListener('error', () => {
+                    reject(new Error('Failed to load image'));
+                });
+            });
+
+            // Create canvas
+            let canvas;
+            let usingOffscreenCanvas = false;
+            if('OffscreenCanvas' in window) {
+                canvas = new OffscreenCanvas(image.width, image.height);
+                usingOffscreenCanvas = true;
+            } else {
+                canvas = document.createElement('canvas');
                 canvas.width = image.width;
                 canvas.height = image.height;
-                ctx.filter = App.util.filterCss[media.filter_class];
-                ctx.drawImage(image, 0, 0, image.width, image.height);
-                ctx.save();
-                canvas.toBlob(function(blob) {
-                    data = new FormData();
-                    data.append('file', blob);
-                    data.append('id', media.id);
-                    axios.post('/api/compose/v0/media/update', data)
-                    .then(res => {
-                        self.media[idx].is_filtered = true;
-                        self.updateFilteringMedia();
-                    }).catch(err => {
-                    });
+            }
+
+            // Draw image with filter to canvas
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                throw new Error('Failed to get canvas context');
+            }
+            if (!('filter' in ctx)) {
+                throw new Error('Canvas filter not supported');
+            }
+            ctx.filter = App.util.filterCss[media.filter_class];
+            ctx.drawImage(image, 0, 0, image.width, image.height);
+            ctx.save();
+
+            // Convert canvas to blob
+            let blob;
+            if(usingOffscreenCanvas) {
+                blob = await canvas.convertToBlob({
+                    type: media.mime,
+                    quality: 1,
                 });
-            }, media.mime, 0.9);
-            ctx.clearRect(0, 0, image.width, image.height);
+            } else {
+                blob = await new Promise((resolve, reject) => {
+                    canvas.toBlob(blob => {
+                        if(blob) {
+                            resolve(blob);
+                        } else {
+                            reject(
+                                new Error('Failed to convert canvas to blob'),
+                            );
+                        }
+                    }, media.mime, 1);
+                });
+            }
+
+            // Upload blob / Update media
+            const data = new FormData();
+            data.append('file', blob);
+            data.append('id', media.id);
+            await axios.post('/api/compose/v0/media/update', data);
+            media.is_filtered = true;
+            this.updateFilteringMedia();
         },
 
         updateFilteringMedia() {
